@@ -9,6 +9,6 @@ class Laser {
 
     public:
         float min_height;
-        void search_min(float* range_laser);
+        // void search_min(float* range_laser);
         explicit Laser();
 };

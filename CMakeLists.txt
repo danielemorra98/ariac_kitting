@@ -93,6 +93,14 @@ find_package(catkin REQUIRED COMPONENTS
 #   cfg/DynReconf2.cfg
 # )
 
+
+find_package(Eigen3 REQUIRED)
+
+# Eigen 3.2 (Wily) only provides EIGEN3_INCLUDE_DIR, not EIGEN3_INCLUDE_DIRS
+if(NOT EIGEN3_INCLUDE_DIRS)
+  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+endif()
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -103,6 +111,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+DEPENDS
+    EIGEN3
 #  INCLUDE_DIRS include
 #  LIBRARIES ariac_kitting
 #  CATKIN_DEPENDS roscpp rospy std_msgs
@@ -133,8 +143,16 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+<<<<<<< HEAD
  add_executable(${PROJECT_NAME}_node src/Moveit.cpp)
+=======
+>>>>>>> d11c76742c4f2a25f83706ec523f9293aae768b4
 
+ 
+include_directories(SYSTEM ${THIS_PACKAGE_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
+link_directories(${catkin_LIBRARY_DIRS})
+add_executable(moveit_node src/MoveIt.cpp)
+target_link_libraries(moveit_node ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use

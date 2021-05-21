@@ -1,7 +1,7 @@
 #include "include/utils.h"
 
 // Laser constructor
-Laser::Laser() {
+Kitting_manager::Kitting_manager() {
     min_height = 100.0;
     laser_width = 395;
 }
